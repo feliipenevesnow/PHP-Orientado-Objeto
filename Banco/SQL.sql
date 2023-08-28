@@ -1,0 +1,31 @@
+CREATE SCHEMA IF NOT EXISTS exercicioBanco DEFAULT CHARACTER SET utf8 ;
+USE exercicioBanco ;
+
+CREATE TABLE IF NOT EXISTS titular (
+  idTitular INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(60) NOT NULL,
+  email VARCHAR(60) NOT NULL,
+  endereco VARCHAR(60) NOT NULL,
+  PRIMARY KEY (idTitular));
+
+CREATE TABLE IF NOT EXISTS conta (
+  agencia INT NOT NULL,
+  numero INT NOT NULL,
+  saldo DOUBLE NOT NULL,
+  tipo VARCHAR(10) NOT NULL,
+  taxa DOUBLE NULL,
+  limite DOUBLE NULL,
+  titular INT NOT NULL,
+  PRIMARY KEY (agencia, numero),
+  FOREIGN KEY (titular) REFERENCES titular (idTitular)
+);
+
+DROP TRIGGER IF EXISTS titular_BEFORE_DELETE;
+
+DELIMITER //
+CREATE TRIGGER titular_BEFORE_DELETE BEFORE DELETE ON titular FOR EACH ROW
+BEGIN
+    DELETE FROM conta WHERE titular = OLD.idTitular;
+END;
+//
+DELIMITER ;

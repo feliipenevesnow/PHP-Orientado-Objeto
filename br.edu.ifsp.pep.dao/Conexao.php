@@ -1,20 +1,26 @@
 <?php
 
-class Conexao {
-
-    private $conn;
-
-    public function __construct(String $username, String $senha) {
-        $this->conn = $this->conectar($username, $senha);
+class Conexao extends PDO {
+    public function __construct($dsn, $username = null, $password = null, array $options = null) {
+        parent::__construct($dsn, $username, $password, $options);
     }
 
-    public function conectar(String $username, String $senha) {
+    static function getNewConnection() {
+        $conn=null;
         try {
-            $conn = new PDO('mysql:host=localhost;dbname=exercicioBanco', $username, $senha);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-        } catch (PDOException $e) {
-            echo 'ERROR: ' . $e->getMessage();
+            $host = "localhost";
+            $dbname = "exercicioBanco";
+            $user = "root";
+            $pass = "lljag8v4";
+            $conn = new Conexao("mysql:host=$host;dbname=$dbname",$user,$pass);
         }
+        catch (PDOException $exc) {
+            echo $exc->getMessage();
+        }
+        return $conn;
+    }
+
+    static function closeConnection(&$conn) {
+        $conn=null;
     }
 }

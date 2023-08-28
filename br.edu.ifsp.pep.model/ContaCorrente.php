@@ -4,38 +4,38 @@ include_once 'Titular.php';
 
 class ContaCorrente extends Conta {
 
-    private double $taxa;
-    private double $limite;
+    private float $taxa;
+    private float $limite;
 
-    public function __construct(Titular $titular, Integer $agencia, Integer $numero) {
-        parent::__construct($titular, $agencia, $numero);
+    public function __construct(Titular $titular, int $agencia, int $numero, String $tipo, float $saldo) {
+        parent::__construct($titular, $agencia, $numero, $tipo, $saldo);
     }
 
     public function __destruct() {
-        echo 'Destroying: ', $this->name, PHP_EOL;
+     
     }
 
-    public function getTaxa(): double {
+    public function getTaxa(): float {
         return $this->taxa;
     }
 
-    public function getLimite(): double {
+    public function getLimite(): float {
         return $this->limite;
     }
 
-    public function setTaxa(double $taxa): void {
+    public function setTaxa(float $taxa): void {
         $this->taxa = $taxa;
     }
 
-    public function setLimite(double $limite): void {
+    public function setLimite(float $limite): void {
         $this->limite = $limite;
     }
 
-    public function getSaldoComLimite(): double {
+    public function getSaldoComLimite(): float {
         return $this->getSaldo() + $this->limite;
     }
 
-    public function depositar(double $valor): bool {
+    public function depositar(float $valor): bool {
         if ($valor > 0) {
             $this->setSaldo($this->getSaldo() + $valor - $taxa);
             echo "Valor depositado com sucesso!";
@@ -46,7 +46,7 @@ class ContaCorrente extends Conta {
         }
     }
 
-     public function sacar(double $valor): bool {
+     public function sacar(float $valor): bool {
         if ($valor < 0 && $this->getSaldoComLimite() < $valor) return false;
         $this->setSaldo($this->getSaldo() - $valor + $taxa);
         return true;

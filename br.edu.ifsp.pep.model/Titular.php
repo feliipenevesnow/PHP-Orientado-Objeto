@@ -2,12 +2,12 @@
 
 class Titular {
 
-    private Integer $id;
+    private int $id;
     private String $nome;
     private String $email;
     private String $endereco;
-
-    public function __construct(Integer $id, String $nome, String $email, String $endereco) {
+    
+    public function __construct(int $id, String $nome, String $email, String $endereco) {
         $this->id = $id;
         $this->nome = $nome;
         $this->email = $email;
@@ -15,10 +15,10 @@ class Titular {
     }
 
     public function __destruct() {
-        echo 'Destroying: ', $this->name, PHP_EOL;
+ 
     }
 
-    public function getId(): Integer {
+    public function getId(): int {
         return $this->id;
     }
 
@@ -34,7 +34,7 @@ class Titular {
         return $this->endereco;
     }
 
-    public function setId(Integer $id): void {
+    public function setId(int $id): void {
         $this->id = $id;
     }
 
