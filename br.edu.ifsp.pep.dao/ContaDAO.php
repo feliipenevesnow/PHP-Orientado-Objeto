@@ -6,7 +6,7 @@ include_once '../../br.edu.ifsp.pep.model/Conta.php';
 include_once '../../br.edu.ifsp.pep.model/ContaCorrente.php';
 include_once '../../br.edu.ifsp.pep.model/ContaPoupanca.php';
 
-class ContaDAO {
+class ContaDAO { 
 
     private $conexao;
 
