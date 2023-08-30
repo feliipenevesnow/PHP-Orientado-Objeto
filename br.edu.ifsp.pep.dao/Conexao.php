@@ -11,7 +11,7 @@ class Conexao extends PDO {
             $host = "localhost";
             $dbname = "exercicioBanco";
             $user = "root";
-            $pass = "lljag8v4";
+            $pass = "";
             $conn = new Conexao("mysql:host=$host;dbname=$dbname",$user,$pass);
         }
         catch (PDOException $exc) {
